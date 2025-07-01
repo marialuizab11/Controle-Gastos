@@ -3,14 +3,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Substitua com suas credenciais do PostgreSQL
-SQLALCHEMY_DATABASE_URL = "postgresql://seu_usuario:sua_senha@localhost/nome_do_banco"
+# Credenciais do banco
+SQLALCHEMY_DATABASE_URL = "postgresql://usuario:123456@localhost/controle_gastos"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# Dependência para obter a sessão do banco
+# Função para obter a sessão do banco
 def get_db():
     db = SessionLocal()
     try:
