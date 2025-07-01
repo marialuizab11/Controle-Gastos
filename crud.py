@@ -34,3 +34,17 @@ def delete_categoria(db: Session, categoria_id: int):
         db.delete(db_categoria)
         db.commit()
     return db_categoria
+
+# Criar despesa
+def create_despesa(db: Session, despesa: schemas.DespesaCreate):
+    db_despesa = models.Despesa(descricao=despesa.descricao, valor=despesa.valor, data=despesa.data, categoria_id=despesa.categoria_id)
+    db.add(db_despesa)
+    db.commit()
+    db.refresh(db_despesa)
+    return db_despesa
+
+# Listar todas despesas 
+def get_despesas(db: Session):
+    from sqlalchemy.orm import joinedload
+    return db.query(models.Despesa).options(joinedload(models.Despesa.categoria)).all()
+    
