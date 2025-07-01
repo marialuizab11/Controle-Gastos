@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+import models
+import schemas
 
 # Criar categoria
 def create_categoria(db: Session, categoria: schemas.CategoriaCreate):
@@ -9,7 +10,7 @@ def create_categoria(db: Session, categoria: schemas.CategoriaCreate):
     db.refresh(db_categoria)
     return db_categoria
 
-# Listar todas categorias
+# Listar todas categorias com paginação
 def get_categorias(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Categoria).offset(skip).limit(limit).all()
 
