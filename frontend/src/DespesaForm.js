@@ -10,8 +10,14 @@ export default function DespesaForm() {
   const [categorias, setCategorias] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  function fetchCategorias() {
     axios.get("http://localhost:8000/categorias").then(res => setCategorias(res.data));
+  }
+
+  useEffect(() => {
+    fetchCategorias();
+    window.addEventListener("categoriasUpdated", fetchCategorias);
+    return () => window.removeEventListener("categoriasUpdated", fetchCategorias);
   }, []);
 
   async function handleSubmit(e) {
