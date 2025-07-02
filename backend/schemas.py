@@ -7,7 +7,7 @@ class CategoriaBase(BaseModel):
 
 # Criação de categoria
 class CategoriaCreate(CategoriaBase):
-    pass
+    nome: str
 
 # Resposta de categoria
 class CategoriaResponse(CategoriaBase):

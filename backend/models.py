@@ -8,7 +8,7 @@ class Categoria(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(100), nullable=False, unique=True)
 
-    despesas = relationship("Despesa", back_populates="categoria")
+    despesas = relationship("Despesa", back_populates="categoria", cascade="all, delete-orphan")
 
 class Despesa(Base):
     __tablename__ = 'despesas'
@@ -17,7 +17,7 @@ class Despesa(Base):
     descricao = Column(String, index=True)
     valor = Column(Numeric(10, 2), nullable=False)
     data = Column(Date, nullable=False)
-    categoria_id = Column(Integer, ForeignKey("categorias.id"))
+    categoria_id = Column(Integer, ForeignKey("categorias.id", ondelete="CASCADE"))
 
     categoria = relationship("Categoria", back_populates="despesas")
     
