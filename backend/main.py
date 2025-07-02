@@ -19,6 +19,14 @@ def create_categoria(categoria: schemas.CategoriaCreate, db: Session = Depends(d
 def read_categorias(db: Session = Depends(database.get_db)):
     return crud.get_categorias(db=db)
 
+@app.patch("/categorias/{id}", response_model=schemas.CategoriaCreate)
+def update_categoria(id: int, categoria: schemas.CategoriaCreate, db: Session = Depends(database.get_db)):
+    return crud.update_categoria(db=db, categoria_id=id, categoria=categoria)
+
+@app.delete("/categorias/{id}", response_model=schemas.CategoriaCreate)
+def delete_categoria(id: int, db: Session = Depends(database.get_db)):
+    return crud.delete_categoria(db=db, categoria_id=id)
+
 @app.post("/despesas", response_model=schemas.DespesaCreate)
 def create_despesa(despesa: schemas.DespesaCreate, db: Session = Depends(database.get_db)):
     return crud.create_despesa(db=db, despesa=despesa)
