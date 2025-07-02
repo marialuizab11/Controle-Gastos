@@ -1,6 +1,6 @@
-from pydantic import BaseModel
 import datetime
 from decimal import Decimal
+from pydantic import BaseModel
 
 class CategoriaBase(BaseModel):
     nome: str

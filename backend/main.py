@@ -1,10 +1,10 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
-import models
-import schemas
-import crud
-import database
+from backend import models
+from backend import schemas
+from backend import crud
+from backend import database
 
 # Cria as tabelas no banco de dados
 models.Base.metadata.create_all(bind=database.engine)
