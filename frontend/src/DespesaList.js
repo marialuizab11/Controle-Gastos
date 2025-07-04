@@ -5,16 +5,31 @@ import axios from "axios";
 export default function DespesaList() {
   const [despesas, setDespesas] = useState([]);
 
+  //Transforma data aaaa-mm-dd para dd/mm/aaaa
+  function formatDate (date) {
+    if(!date) return '';
+    const [year, month, day] = date.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
   function fetchDespesas() {
     axios.get("http://localhost:8000/despesas").then(res => {
-      setDespesas(res.data);
+      const despesasFormatadas = res.data.map(desp => ({
+        ...desp,
+        data: formatDate(desp.data)
+      }));
+      setDespesas(despesasFormatadas);
     });
   }
 
   useEffect(() => {
     fetchDespesas();
     window.addEventListener("despesasUpdated", fetchDespesas);
-    return () => window.removeEventListener("despesasUpdated", fetchDespesas);
+    window.addEventListener("categoriasUpdated", fetchDespesas);
+    return () => {
+      window.removeEventListener("despesasUpdated", fetchDespesas);
+      window.removeEventListener("categoriasUpdated", fetchDespesas);
+    };
   }, []);
 
   return (
