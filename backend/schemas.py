@@ -30,3 +30,10 @@ class Despesa(DespesaBase):
 
     class Config:
         from_attributes = True
+
+class categoriaDespesaIA(BaseModel):
+    valor: float
+    descricao: str
+
+class CategoriaSugerida(BaseModel):
+    categoria_sugerida: str
