@@ -61,6 +61,7 @@ export default function Form({ fields, onSubmit, loading, submitLabel }) {
             size={field.size || "small"}
             type={field.type}
             inputProps={field.inputProps}
+            InputProps={field.InputProps}
             InputLabelProps={field.InputLabelProps}
             sx={field.sx}
             style={field.style}

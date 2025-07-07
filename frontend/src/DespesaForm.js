@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "./components/Form";
+import DespesaFormIAButton from "./DespesaFormIAButton";
 
 /**
  * Formulário para cadastrar nova despesa.
@@ -56,47 +57,52 @@ export default function DespesaForm() {
   }
 
   return (
-    <Form
-      fields={[
-        {
-          label: "Descrição",
-          value: descricao,
-          onChange: e => setDescricao(e.target.value),
-          required: true,
-          size: "small"
-        },
-        {
-          label: "Valor",
-          value: valor,
-          onChange: e => setValor(e.target.value),
-          required: true,
-          size: "small",
-          type: "number",
-          inputProps: { step: "0.01" }
-        },
-        {
-          label: "Data",
-          value: data,
-          onChange: e => setData(e.target.value),
-          required: true,
-          size: "small",
-          type: "date",
-          InputLabelProps: { shrink: true }
-        },
-        {
-          select: true,
-          label: "Categoria",
-          value: categoriaId,
-          onChange: e => setCategoriaId(e.target.value),
-          required: true,
-          size: "small",
-          sx: { minWidth: 120 },
-          options: categorias.map(cat => ({ value: cat.id, label: cat.nome }))
-        }
-      ]}
-      onSubmit={handleSubmit}
-      loading={loading}
-      submitLabel="Adicionar"
-    />
+    <>
+      <Form
+        fields={[
+          {
+            label: "Descrição",
+            value: descricao,
+            onChange: e => setDescricao(e.target.value),
+            required: true,
+            size: "small"
+          },
+          {
+            label: "Valor",
+            value: valor,
+            onChange: e => setValor(e.target.value),
+            required: true,
+            size: "small",
+            type: "number",
+            inputProps: { step: "0.01" }
+          },
+          {
+            label: "Data",
+            value: data,
+            onChange: e => setData(e.target.value),
+            required: true,
+            size: "small",
+            type: "date",
+            InputLabelProps: { shrink: true }
+          },
+          {
+            select: true,
+            label: "Categoria",
+            value: categoriaId,
+            onChange: e => setCategoriaId(e.target.value),
+            required: true,
+            size: "small",
+            sx: { minWidth: 120 },
+            options: categorias.map(cat => ({ value: cat.id, label: cat.nome }))
+          }
+        ]}
+        onSubmit={handleSubmit}
+        loading={loading}
+        submitLabel="Adicionar"
+      />
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
+        <DespesaFormIAButton descricao={descricao} valor={valor} />
+      </div>
+    </>
   );
 }
